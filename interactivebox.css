@@ -1,0 +1,57 @@
+#box-container {
+	background: black;
+	position: relative;
+}
+#left {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20;
+}
+#right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 20;
+}
+.box {
+	display: inline-block;
+	position: absolute;
+}
+
+#box1 {
+	background: red;
+}
+#box2 {
+	background: orange;
+}
+#box3 {
+	background: yellow;
+}
+#box4 {
+	background: green;
+}
+#box5 {
+	background: blue;
+}
+#box6 {
+	background: purple;
+}
+#box7 {
+	background: red;
+}
+#box8 {
+	background: orange;
+}
+#box9 {
+	background: yellow;
+}
+#box10 {
+	background: green;
+}
+#box11 {
+	background: blue;
+}
+#box12 {
+	background: purple;
+}
