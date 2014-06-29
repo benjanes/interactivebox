@@ -1,8 +1,6 @@
 $('document').ready(function() {
 	
-	//need to set up for user definition of w, h, and whether or not to make circular. set on submit. make sure that it is rewritten dynamically...
-	var width = 600;
-	var height = 200;
+
 // $box.css({'-moz-border-radius': (w/4)+'px', '-webkit-border-radius': (w/4)+'px', 'border-radius': (w/4)+'px'});
 
 var box_initiate = function (w, h){	
@@ -234,7 +232,13 @@ var box_initiate = function (w, h){
 
 //define width and height as .val(), try null or undefined setting?
 
-box_initiate(width, height);
+$('form').submit(function(e){
+	var width = $('#width').val();
+	var height = $('#height').val();
+	box_initiate(width, height);
+	e.preventDefault();
+});
+
  
  
 }); // end ready
