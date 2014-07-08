@@ -226,8 +226,12 @@ $('#right').hover(function() {
 $('#submit').click(function(e){
 	w = $('#width').val();
 	h = $('#height').val();
-	
-	//$box.css({'-moz-border-radius': (w/4)+'px', '-webkit-border-radius': (w/4)+'px', 'border-radius': (w/4)+'px'});
+
+	if ($('#checkbox').attr('checked')) {
+		$('.box').css({'-moz-border-radius': (w/4)+'px', '-webkit-border-radius': (w/4)+'px', 'border-radius': (w/4)+'px'});
+	} else {
+		$('.box').css({'-moz-border-radius': '0px', '-webkit-border-radius': '0px', 'border-radius': '0px'});
+	}
 
 	box_initiate(w, h);
  	e.preventDefault();
