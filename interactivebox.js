@@ -3,7 +3,7 @@ $('document').ready(function() {
 $box = $('.box');
 
 	
-var box_horizontal = function (w, h){	
+var box_horizontal = function (w, h){
 	$('#box-container').css({width: w+'px', height: h+'px'});
 	$('#left').css({width: (w/4)+'px', height: h+'px'});
 	$('#right').css({width: (w/4)+'px', height: h+'px'});
@@ -28,7 +28,6 @@ var box_horizontal = function (w, h){
 	left = 6;
 	animateInterval = 500; // speed of the animation steps
 	itemInterval = 1000; // delay interval on the loop
-	
 }
 
 var box_vertical = function (w, h){
@@ -47,14 +46,13 @@ var box_vertical = function (w, h){
 	$box.eq(0).css({left: (7*w/16)+'px',top: (29*h/32)+'px',height: (h/16)+'px',width: (w/8)+'px'});
 
 	numberOfItems = $('.box').length;
-	top = numberOfItems-1;
+	bottom = numberOfItems-1;
 	a = 0;
 	b = 1;
 	c = 2;
 	d = 3;
 	e = 4;
 	f = 5;
-	bottom = 6;
 	animateInterval = 500; // speed of the animation steps
 	itemInterval = 1000; // delay interval on the loop
 }
@@ -152,7 +150,10 @@ var counterclockwise_vert = function() {
 		left: (w/2)+'px',
 		width: '0px',
 		height: '0px'
-	}, animateInterval);
+	}, animateInterval)
+	.animate({
+		top: '0px',
+	}, 0);
 	$box.eq(b).stop().animate({
 		left: (7*w/16)+'px',
 		top: (29*h/32)+'px',
@@ -178,17 +179,18 @@ var counterclockwise_vert = function() {
 		width: (w/4)+'px'
 	}, animateInterval);
 	$box.eq(f).stop().animate({
+		left: (w/2)+'px',
+		top: '0px',
+		width: '0px',
+		height: '0px'
+	}, 0)
+	.animate({
 		left: (7*w/16)+'px',
 		top: (h/32)+'px',
 		height: (h/16)+'px',
 		width: (w/8)+'px'
 	}, animateInterval);
-	$box.eq(bottom).stop().animate({
-		left: (w/2)+'px',
-		top: '0px',
-		width: '0px',
-		height: '0px'
-	}, animateInterval);
+	
 	if(a == numberOfItems -1){
 	    a = 0;	
 	}else{
@@ -218,11 +220,6 @@ var counterclockwise_vert = function() {
 	    f = 0;	
 	}else{
 	    f++;					
-	}
-	if(top == numberOfItems -1){
-	    top = 0;	
-	}else{
-	    top++;					
 	}
 	if(bottom == numberOfItems -1){
 	    bottom = 0;	
@@ -325,7 +322,7 @@ var clockwise = function() {
 
 // defines steps in clockwise_vert motion (#bottom hover)
 var clockwise_vert = function() {
-	$box.eq(top).stop().animate({
+	$box.eq(bottom).stop().animate({
 		top: h+'px',
 		left: (w/2)+'px',
 		width: '0px',
@@ -373,6 +370,7 @@ var clockwise_vert = function() {
 		width: '0px',
 		height: '0px'
 	}, animateInterval);
+	
 	if(a == 0){
 	    a = numberOfItems -1;	
 	}else{
@@ -407,11 +405,6 @@ var clockwise_vert = function() {
 	    bottom = numberOfItems -1;	
 	}else{
 	    bottom--;					
-	}
-	if(top == 0){
-	    top = numberOfItems -1;	
-	}else{
-	    top--;					
 	}
 }; // END of clockwise_vert() definition
 
@@ -453,13 +446,23 @@ $('#submit').click(function(e){
 	w = $('#width').val();
 	h = $('#height').val();
 
-	if ($('#checkbox').attr('checked')) {
+	if ($('#rounded').attr('checked')) {
 		$('.box').css({'-moz-border-radius': (w/4)+'px', '-webkit-border-radius': (w/4)+'px', 'border-radius': (w/4)+'px'});
 	} else {
 		$('.box').css({'-moz-border-radius': '0px', '-webkit-border-radius': '0px', 'border-radius': '0px'});
 	}
 
-	box_vertical(w, h);
+	if ($('#orientation').attr('checked')) {
+		$('#left').css({width: '0px', height: '0px'});
+		$('#right').css({width: '0px', height: '0px'});
+		box_vertical(w, h);
+	} else {
+		$('#top').css({width: '0px', height: '0px'});
+		$('#bottom').css({width: '0px', height: '0px'});
+		box_horizontal(w, h);
+	}
+
+
  	e.preventDefault();
 });
  
